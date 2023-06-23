@@ -15,25 +15,15 @@
 # include "Bureaucrat.hpp"
 class Bureaucrat;
 class Form{
-         class GradeTooLowException: public std::exception
-    {
-    	public:
-    	    virtual const char* what() const throw();
-    };
-        class GradeTooHighException: public std::exception
-    {
-    	public:
-    	    virtual const char* what() const throw();
-    };
     private:
         const std::string _name;
+        const int _gradeS;
+        const int _gradeE;
         bool _signed;
-        int _gradeS;
-        int _gradeE;
-    public:
         Form();
+    public:
         ~Form();
-        Form(Form const &copy);
+        Form(const Form &copy);
         Form(std::string name, int gradeE, int gradeS);
         Form & operator=(Form const &copy);
         std::string getName();
@@ -41,6 +31,16 @@ class Form{
         int getGradeE();
         bool getSigne();
         void  beSigned(Bureaucrat bureaucrate);
+        class GradeTooLowException: public std::exception
+        {
+            public:
+                virtual const char* what() const throw();
+        };
+        class GradeTooHighException: public std::exception
+        {
+            public:
+                virtual const char* what() const throw();
+        };
 };
 std::ostream & operator<<(std::ostream &o,Form &rh );
 #endif
