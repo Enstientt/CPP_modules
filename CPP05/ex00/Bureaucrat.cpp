@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 07:41:56 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/06/19 15:33:04 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/06/25 19:26:52 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,13 @@ Bureaucrat::Bureaucrat(Bureaucrat const &copy){
     }
 }
 
-std::string Bureaucrat::getName(){
+std::string Bureaucrat::getName() const
+{
     return this->_name;
 }
 
-int Bureaucrat::getGrade(){
+int Bureaucrat::getGrade() const
+{
     return this->_grade;
 }
 

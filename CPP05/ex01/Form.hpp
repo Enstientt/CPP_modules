@@ -17,8 +17,8 @@ class Bureaucrat;
 class Form{
     private:
         const std::string _name;
-        const int _gradeS;
         const int _gradeE;
+        const int _gradeS;
         bool _signed;
         Form();
     public:
@@ -27,10 +27,10 @@ class Form{
         Form(std::string name, int gradeE, int gradeS);
         Form & operator=(Form const &copy);
         std::string getName();
-        int getGradeS();
-        int getGradeE();
-        bool getSigne();
-        void  beSigned(Bureaucrat bureaucrate);
+        int getGradeS() const;
+        int getGradeE() const;
+        bool getSigne() const;
+        void  beSigned(Bureaucrat &bureaucrate);
         class GradeTooLowException: public std::exception
         {
             public:

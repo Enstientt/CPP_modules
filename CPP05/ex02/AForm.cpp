@@ -47,19 +47,19 @@ AForm::AForm(AForm const &copy){
     *this = copy;
 }
 
-std::string AForm::getName(){
+std::string AForm::getName() const{
     return this->_name;
 }
 
-int AForm::getGradeS(){
+int AForm::getGradeS() const{
     return this->_gradeS;
 }
 
-int AForm::getGradeE(){
+int AForm::getGradeE() const{
     return this->_gradeE;
 }
 
-bool AForm::getSigne(){
+bool AForm::getSigne() const {
     return this->_signed;
 }
 // void AForm::decrementGrade(){
@@ -76,21 +76,27 @@ bool AForm::getSigne(){
 
 const char* AForm::GradeTooLowException::what() const throw()
     {
-         return "grade too low ";
+         return "grade too low (bigger than 150).";
     }
 
 const char* AForm::GradeTooHighException::what() const throw()
     {
-         return "grade too high ";
+         return "grade too high (smaller than 1).";
     }
+const char* AForm::NotSignedException::what() const throw()
+    {
+         return "form not signed.";
+    }
+
 void AForm::beSigned(Bureaucrat bureaucrat)
 {
     if (bureaucrat.getGrade() < 1 )
      return;
 }
+
 std::ostream & operator<<(std::ostream &o,AForm &rh )
 {
-    o<<rh.getName()<<"AForm has : "<<std::endl;
+    o<<rh.getName()<<"Form has : "<<std::endl;
     o<<"signed grade "<< rh.getGradeS()<<std::endl;
     o<<"executed grade "<< rh.getGradeE()<<std::endl;
     o<<"signe"<<rh.getSigne()<<std::endl;

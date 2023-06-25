@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 07:42:03 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/06/19 15:48:05 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/06/25 14:31:03 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int main()
 {
     try
     {
-        Form form("name", 14, 46);
-         Bureaucrat bureaucrat("name1", 52);
+        Bureaucrat bureaucrat("name1", 52);
+        Form form("name", 56, 56);
         form.beSigned(bureaucrat);
         bureaucrat.signForm(form);
         std::cout << form<<std::endl;

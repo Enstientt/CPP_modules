@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 07:41:56 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/06/19 15:48:32 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/06/25 14:29:37 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ void Bureaucrat::signForm(Form form)
 {
     if (form.getSigne() == true)
     {
-        std::cout<< this<< "signed"<< form;
+        std::cout<< *this<< "signed"<< form;
     }
     else{
-        std::cout<< *this<< " couldn’t sign"<< form << "because of you : you re the rason"<<std::endl;
+        std::cout<< *this<< " couldn’t sign"<< form << "because of you : you re the rason(chandler voice)"<<std::endl;
     }
 }
 std::ostream & operator<<(std::ostream &o,Bureaucrat &rh ){

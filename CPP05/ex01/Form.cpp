@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 07:51:47 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/06/23 22:09:19 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/06/25 19:27:52 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,28 +44,20 @@ std::string Form::getName(){
     return this->_name;
 }
 
-int Form::getGradeS(){
+int Form::getGradeS() const
+{
     return this->_gradeS;
 }
 
-int Form::getGradeE(){
+int Form::getGradeE() const
+{
     return this->_gradeE;
 }
 
-bool Form::getSigne(){
+bool Form::getSigne() const
+{
     return this->_signed;
 }
-// void Form::decrementGrade(){
-//     if (this->_gradeE > 150)
-//         throw "grade out of range (min)"; 
-//     this->_grade++;
-// }
-
-// void Form::incrementGrade(){
-//     if (this->_grade - 1 < 1)
-//         throw "grade out of range (max)"; 
-//     this->_grade--;
-// }
 
 const char* Form::GradeTooLowException::what() const throw()
     {
@@ -76,14 +68,14 @@ const char* Form::GradeTooHighException::what() const throw()
     {
          return "Form::GradeTooHighException";
     }
-void Form::beSigned(Bureaucrat bureaucrat)
+void Form::beSigned(Bureaucrat &bureaucrat)
 {
     try
     {
         if (this->getGradeS() <= bureaucrat.getGrade())
         {
             this->_signed = true;
-            std::cout<< this->getName()<< " signed  the form "<<std::endl;
+            std::cout<< bureaucrat << " signed  the form "<<std::endl;
         }
         else
             throw GradeTooLowException();
