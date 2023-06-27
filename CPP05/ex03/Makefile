@@ -6,15 +6,15 @@
 #    By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/06 07:42:05 by zessadqu          #+#    #+#              #
-#    Updated: 2023/06/17 15:11:16 by zessadqu         ###   ########.fr        #
+#    Updated: 2023/06/26 23:19:03 by zessadqu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = main
 
-SRCS = Bureaucrat.cpp main.cpp Form.cpp
+SRCS = Bureaucrat.cpp main.cpp AForm.cpp  RobotomyRequestForm.cpp PresidentialPardonForm.cpp ShrubberyCreationForm.cpp Intern.cpp
 
-HEADERS = Form.hpp Bureaucrat.hpp
+HEADERS = AForm.hpp Bureaucrat.hpp AForm.hpp PresidentialPardonForm.hpp   RobotomyRequestForm.hpp ShrubberyCreationForm.hpp Intern.hpp
 
 OBJS = $(SRCS:.cpp=.o)
 

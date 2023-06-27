@@ -6,17 +6,17 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 07:42:00 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/06/18 11:23:19 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/06/25 21:50:16 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUREAUCRAT_HPP
 #define BUREAUCRAT_HPP
 
+#include "AForm.hpp"
 #include <iostream>
-#include "Form.hpp"
 
-class Form;
+class AForm;
 class Bureaucrat{
      class TooLowGrade: public std::exception
     {
@@ -36,12 +36,13 @@ class Bureaucrat{
         ~Bureaucrat();
         Bureaucrat(Bureaucrat const &copy);
         Bureaucrat(std::string name, int grade);
-        std::string getName();
-        int getGrade();
+        std::string getName() const ;
+        int getGrade() const;
         void incrementGrade();
         void decrementGrade();
-        void signForm(Form form);
+        void signForm(AForm  &form);
         Bureaucrat & operator=(Bureaucrat & copy);
+        void executeForm(AForm const & form);
 };
 std::ostream & operator<<(std::ostream &o,Bureaucrat &rh );
 #endif

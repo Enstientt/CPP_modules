@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 07:41:56 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/06/18 10:34:58 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/06/26 22:26:04 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ Bureaucrat::Bureaucrat(Bureaucrat const &copy){
     }
 }
 
-std::string Bureaucrat::getName(){
+std::string Bureaucrat::getName() const{
     return this->_name;
 }
 
-int Bureaucrat::getGrade(){
+int Bureaucrat::getGrade() const{
     return this->_grade;
 }
 
@@ -77,7 +77,7 @@ const char* Bureaucrat::TooHighGrade::what() const throw()
     {
          return "grade too high ";
     }
-void Bureaucrat::signForm(Form form)
+void Bureaucrat::signForm(AForm &form)
 {
     if (form.getSigne() == true)
     {
@@ -85,8 +85,22 @@ void Bureaucrat::signForm(Form form)
     }
     else{
         std::cout<< this<< " couldn’t sign"<< form << "because of you : you re the rason"<<std::endl;
+}
+    }
+
+void Bureaucrat::executeForm(AForm const & form)
+{
+    try
+    {
+        form.execute(*this);
+        std::cout << this->getName() << " executes " << form.getName() << std::endl;
+    }
+    catch(const std::exception& e)
+    {
+        std::cout<<"couldn't execute "<< form.getName() << " because " << e.what()<< std::endl;
     }
 }
+
 std::ostream & operator<<(std::ostream &o,Bureaucrat &rh ){
     o << rh.getName() << ", bureaucrat grade "<< rh.getGrade()<<std::endl;
     return o;

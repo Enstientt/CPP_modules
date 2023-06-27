@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 14:31:31 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/06/25 20:39:58 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:10:14 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,29 @@ ShrubberyCreationForm & ShrubberyCreationForm::operator=(ShrubberyCreationForm c
 
 void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
+    std::cout<<"the execute ShrubberyCreationForm function is called"<<std::endl;
     if (executor.getGrade() > this->getGradeE())
         throw AForm::GradeTooLowException();
-    std::ofstream file;
-    file.open(this->_target + "_shrubbery");
-       file<<"v .   ._, |_  .,                   "<<std::endl;
-       file<< "   `-._\/  .  \ /    |/_          "<<std::endl;
-       file<< "       \\  _\, y | \//            "<<std::endl;
-       file<< " _\_.___\\, \\/ -.\||             "<<std::endl;
-       file<< "   `7-,--.`._||  / / ,            "<<std::endl;
-       file<< "   /'     `-. `./ / |/_.'         "<<std::endl;
-       file<< "             |    |//             "<<std::endl;
-       file<< "             |_    /              "<<std::endl;
-       file<< "             |-   |               "<<std::endl;
-       file<< "             |   =|               "<<std::endl;
-       file<< "             |    |               "<<std::endl;
-       file<< "----------------/ ,  . \--------._"<<std::endl;
-    file.close();
+    std::ofstream fil((this->getTarget() + "_shrubbery").c_str());
+    
+    if (!fil.is_open())
+    {
+            std::cout<<"Error opening file"<<std::endl;
+            return ;
+    };
+    fil <<"v .   ._, |_  .,                   "<<std::endl;
+    fil<< "   `-._/  .   /    |/_          "<<std::endl;
+    fil<< "       \\  _, y | /            "<<std::endl;
+    fil<< " __.___\\, \\/ -.||             "<<std::endl;
+    fil<< "   `7-,--.`._||  / / ,            "<<std::endl;
+    fil<< "   /'     `-. `./ / |/_.'         "<<std::endl;
+    fil<< "             |    |//             "<<std::endl;
+    fil<< "             |_    /              "<<std::endl;
+    fil<< "             |-   |               "<<std::endl;
+    fil<< "             |   =|               "<<std::endl;
+    fil<< "             |    |               "<<std::endl;
+    fil<< "----------------/ ,  . --------._"<<std::endl;
+    fil.close();
 }
 
 std::string ShrubberyCreationForm::getTarget() const 

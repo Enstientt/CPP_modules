@@ -12,19 +12,10 @@
 
 #ifndef AForm_HPP
 #define AForm_HPP
+#include <iostream>
 # include "Bureaucrat.hpp" 
 class Bureaucrat;
 class AForm{
-         class GradeTooLowException: public std::exception
-    {
-    	public:
-    	    virtual const char* what() const throw();
-    };
-        class GradeTooHighException: public std::exception
-    {
-    	public:
-    	    virtual const char* what() const throw();
-    };
     private:
         std::string _name;
         bool _signed;
@@ -32,16 +23,31 @@ class AForm{
         int _gradeE;
     public:
         AForm();
-        ~AForm();
+        virtual ~AForm();
         AForm(AForm const &copy);
         AForm(std::string name, int gradeE, int gradeS);
         AForm & operator=(AForm const &copy);
-        virtual void  const execute(Bureaucrat const & executor)=0;
-        std::string getName();
-        int getGradeS();
-        int getGradeE();
-        bool getSigne();
+        std::string getName() const;
+        virtual void execute(Bureaucrat const & executor) const=0;
+        int getGradeS() const;
+        int getGradeE() const;
+        bool getSigne() const;
         void  beSigned(Bureaucrat bureaucrate);
+        class GradeTooLowException: public std::exception
+        {
+            public:
+        	    virtual const char* what() const throw();
+        };
+        class GradeTooHighException: public std::exception
+        {
+            public:
+        	    virtual const char* what() const throw();
+        };
+        class NotSignedException: public std::exception
+        {
+            public:
+        	    virtual const char* what() const throw();
+        };
         
 };
 std::ostream & operator<<(std::ostream &o,AForm &rh );

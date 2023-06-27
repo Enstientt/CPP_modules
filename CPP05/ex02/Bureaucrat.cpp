@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 07:41:56 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/06/25 22:00:22 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:36:50 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,14 @@ const char* Bureaucrat::TooHighGrade::what() const throw()
     }
 void Bureaucrat::signForm(AForm &form)
 {
-    if (form.getSigne() == true)
+    try
     {
-        std::cout<< this<< "signed"<< form;
+        form.beSigned(*this);
+        std::cout << this->getName() << " signs " << form.getName() << std::endl;
     }
-    else{
-        std::cout<< this<< " couldn’t sign"<< form << "because of you : you re the rason"<<std::endl;
+    catch(const std::exception& e)
+    {
+        std::cout<<"couldn't sign "<< form.getName() << " because " << e.what()<< std::endl;
     }
 }
 
