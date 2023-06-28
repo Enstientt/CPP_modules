@@ -6,10 +6,11 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 07:41:56 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/06/27 15:36:50 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:55:59 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Bureaucrat.hpp"
 #include "Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat(){

@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 19:43:49 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/06/28 13:43:42 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/06/28 14:40:15 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,9 +139,9 @@ void ScalarConverter::handleInt(const std::string& param)
 
 void ScalarConverter::convert(std::string param)
 {
-    std::size_t found;
-
-    if (isSpecialFloat(param))
+    try
+    {
+         if (isSpecialFloat(param))
     {
         handleSpecialFloat(param);
         return;
@@ -172,4 +172,10 @@ void ScalarConverter::convert(std::string param)
     }
 
     handleInt(param);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    
 }

@@ -6,7 +6,7 @@ HEADERS = ScalarConverter.hpp
 
 OBJS = $(SRCS:.cpp=.o)
 
-FLAGS = -Wall -Wextra -Werror -std=c++98
+FLAGS = -Wall -Wextra -Werror #-std=c++98
 
 CC = c++
 

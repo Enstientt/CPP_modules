@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 07:42:03 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/06/26 23:18:16 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:55:22 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
 
 int main()   
 {
-     Bureaucrat mehdi("mehdi", 5);
-    Intern karim;
-    AForm   *rrf;
+     Bureaucrat mee("mee", 5);
+    Intern me;
+    AForm   *form;
     
-    rrf = karim.makeForm("robotomy request", "home");
-    if (rrf == NULL)
+    form = me.makeForm("robotomy request", "bender");
+    if (form == NULL)
         return 1;
-    mehdi.signForm(*rrf);
-    mehdi.executeForm(*rrf);
-    delete rrf;
+    mee.signForm(*form);
+    mee.executeForm(*form);
+    delete form;
     return 0;
 }
