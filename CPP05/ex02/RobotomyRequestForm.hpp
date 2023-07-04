@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 14:31:29 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/06/25 20:41:49 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/03 15:48:25 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 class RobotomyRequestForm : public AForm{
     private:
         const std::string _target;
-    public:
         RobotomyRequestForm();
+    public:
         virtual ~RobotomyRequestForm();
         RobotomyRequestForm(RobotomyRequestForm const &copy);
         RobotomyRequestForm(std::string target);

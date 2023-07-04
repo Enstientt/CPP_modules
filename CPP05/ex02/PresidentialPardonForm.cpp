@@ -6,11 +6,16 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 14:31:20 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/06/25 21:37:14 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/03 15:48:15 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
+
+
+PresidentialPardonForm::PresidentialPardonForm()
+{ 
+}
 
 PresidentialPardonForm::PresidentialPardonForm(std::string target):AForm("PresidentialPardonForm", 25, 5), _target(target)
 {

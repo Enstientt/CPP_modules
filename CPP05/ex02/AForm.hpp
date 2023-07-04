@@ -17,10 +17,10 @@
 class Bureaucrat;
 class AForm{
     private:
-        std::string _name;
+        const std::string _name;
         bool _signed;
-        int _gradeS;
-        int _gradeE;
+        const int _gradeS;
+        const int _gradeE;
     public:
         AForm();
         virtual ~AForm();
@@ -32,21 +32,21 @@ class AForm{
         int getGradeS() const;
         int getGradeE() const;
         bool getSigne() const;
-        void  beSigned(Bureaucrat bureaucrate);
+        void  beSigned(Bureaucrat &bureaucrate);
         class GradeTooLowException: public std::exception
         {
             public:
-        	    virtual const char* what() const throw();
+        	    const char* what() const throw();
         };
         class GradeTooHighException: public std::exception
         {
             public:
-        	    virtual const char* what() const throw();
+        	    const char* what() const throw();
         };
         class NotSignedException: public std::exception
         {
             public:
-        	    virtual const char* what() const throw();
+        	    const char* what() const throw();
         };
         
 };

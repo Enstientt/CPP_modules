@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 22:31:56 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/06/26 22:57:07 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/04 17:21:48 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 class Intern
 {
     private:
-        //nothing here
+        /*code here*/
     public:
         Intern();
         ~Intern();

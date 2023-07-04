@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 14:31:26 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/06/25 21:34:52 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/03 15:48:19 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 class PresidentialPardonForm: public AForm{
     private:
         const std::string _target;
-    public:
         PresidentialPardonForm();
+    public:
         virtual ~PresidentialPardonForm();
         PresidentialPardonForm(PresidentialPardonForm const &copy);
         PresidentialPardonForm(std::string target);

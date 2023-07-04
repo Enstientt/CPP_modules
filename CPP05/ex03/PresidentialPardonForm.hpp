@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 14:31:26 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/06/25 21:34:52 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/03 18:47:12 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ class PresidentialPardonForm: public AForm{
         class GradeTooLowException: public std::exception
         {
             public:
-                virtual const char* what() const throw();
+                const char* what() const throw();
         };
         class GradeTooHighException: public std::exception
         {
             public:
-                virtual const char* what() const throw();
+                const char* what() const throw();
         };
 };
 #endif

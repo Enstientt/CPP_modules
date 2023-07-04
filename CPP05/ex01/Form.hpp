@@ -26,7 +26,7 @@ class Form{
         Form(const Form &copy);
         Form(std::string name, int gradeE, int gradeS);
         Form & operator=(Form const &copy);
-        std::string getName();
+        std::string getName() const;
         int getGradeS() const;
         int getGradeE() const;
         bool getSigne() const;

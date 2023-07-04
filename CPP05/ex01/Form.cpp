@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 07:51:47 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/06/25 19:27:52 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/04 16:34:22 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ Form::Form(const Form &copy) : _gradeE(copy._gradeE), _gradeS(copy._gradeS), _si
     *this = copy;
 }
 
-std::string Form::getName(){
+std::string Form::getName() const{
     return this->_name;
 }
 
@@ -61,22 +61,19 @@ bool Form::getSigne() const
 
 const char* Form::GradeTooLowException::what() const throw()
     {
-         return "Form::GradeTooLowException";
+         return "Form:grade too low";
     }
 
 const char* Form::GradeTooHighException::what() const throw()
     {
-         return "Form::GradeTooHighException";
+         return "Form:grade too high";
     }
 void Form::beSigned(Bureaucrat &bureaucrat)
 {
     try
     {
         if (this->getGradeS() <= bureaucrat.getGrade())
-        {
             this->_signed = true;
-            std::cout<< bureaucrat << " signed  the form "<<std::endl;
-        }
         else
             throw GradeTooLowException();
     }
@@ -88,7 +85,7 @@ void Form::beSigned(Bureaucrat &bureaucrat)
 }
 std::ostream & operator<<(std::ostream &o,Form &rh )
 {
-    o<<rh.getName()<<" the Form : "<<std::endl;
+    o<<" the Form : "<<rh.getName()<<std::endl;
     o<<"signed grade "<< rh.getGradeS()<<std::endl;
     o<<"executed grade "<< rh.getGradeE()<<std::endl;
     o<<"signe "<<rh.getSigne()<<std::endl;

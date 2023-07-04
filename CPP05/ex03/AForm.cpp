@@ -12,7 +12,7 @@
 
 #include "AForm.hpp"
 
-AForm::AForm(){
+AForm::AForm():_name("null"), _signed(false),_gradeS(0),  _gradeE(0) {
 std::cout<<"AForm constructor called"<<std::endl;
 }
 
@@ -20,30 +20,25 @@ AForm::~AForm(){
     std::cout<<"AForm destructor called"<<std::endl;
 }
 
-AForm::AForm(std::string name,  int gradeE, int gradeS) : _name(name)
+AForm::AForm(std::string name,  int gradeE, int gradeS) : _name(name), _gradeS(gradeS), _gradeE(gradeE)
 {
     std::cout<<"AForm constructor called"<<std::endl;
     if (gradeS < 1 || gradeE < 1)
         throw GradeTooHighException();
     if (gradeS> 150 || gradeE > 150)
         throw GradeTooLowException();
-    this->_gradeS = gradeS;
-    this->_gradeE = gradeE;
 }
 
-
-AForm & AForm::operator=(AForm const  &copy){
+AForm & AForm::operator=(AForm const  &copy)
+   {
     if (this != &copy)
     {
-        this->_name = copy._name;
-        this->_gradeS = copy._gradeS;
-        this->_gradeE = copy._gradeE;
         this->_signed = copy._signed;
     }
     return *this;
 }
 
-AForm::AForm(AForm const &copy){
+AForm::AForm(AForm const &copy): _name(copy._name), _gradeS(copy._gradeS), _gradeE(copy._gradeE){
     *this = copy;
 }
 
@@ -88,17 +83,27 @@ const char* AForm::NotSignedException::what() const throw()
          return "form not signed.";
     }
 
-void AForm::beSigned(Bureaucrat bureaucrat)
+void AForm::beSigned(Bureaucrat &bureaucrat)
 {
-    if (bureaucrat.getGrade() < 1 )
-     return;
+    try
+    {
+        if (this->getGradeS() <= bureaucrat.getGrade())
+            this->_signed = true;
+        else
+            throw GradeTooLowException();
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() <<std::endl;
+    }
+    
 }
 
 std::ostream & operator<<(std::ostream &o,AForm &rh )
 {
-    o<<rh.getName()<<"Form has : "<<std::endl;
+    o<<" The Form : "<<rh.getName()<<std::endl;
     o<<"signed grade "<< rh.getGradeS()<<std::endl;
     o<<"executed grade "<< rh.getGradeE()<<std::endl;
-    o<<"signe"<<rh.getSigne()<<std::endl;
+    o<<"signe "<<rh.getSigne()<<std::endl;
     return o;
 }
