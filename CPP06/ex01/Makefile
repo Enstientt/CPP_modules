@@ -1,12 +1,12 @@
 NAME = main
 
-SRCS =  ScalarConverter.cpp main.cpp
+SRCS =  Serializer.cpp main.cpp
 
-HEADERS = ScalarConverter.hpp
+HEADERS = Serializer.hpp
 
 OBJS = $(SRCS:.cpp=.o)
 
-FLAGS = -Wall -Wextra -Werror #-std=c++98
+FLAGS = -Wall -Wextra -Werror -std=c++98
 
 CC = c++
 
