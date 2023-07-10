@@ -32,3 +32,30 @@ void Base::identify(Base *p){
         std::cout<<"Type C"<<std::endl;
 }
 
+void Base::identify(Base &ref)
+{
+    try{
+        A &refa =dynamic_cast<A &>(ref);
+        (void)refa;
+        std::cout<<"Type A"<<std::endl;
+        return;
+    }
+    catch(const std::exception & e){
+    }
+        try{
+        B &refb =dynamic_cast<B &>(ref); 
+        (void)refb;
+         std::cout<<"Type B"<<std::endl;
+         return;
+    }
+    catch(const std::exception & e){
+    }
+        try{
+        C &refc =dynamic_cast<C &>(ref); 
+        (void)refc;
+         std::cout<<"Type C"<<std::endl;
+        return;
+    }
+    catch(const std::exception & e){
+    }
+}

@@ -2,7 +2,9 @@
 
 int main()
 {
-    Base *ptr = new B;
-
+    C a;
+    Base *ptr = a.generate();
+    C &ref = a;
     ptr->identify(ptr);
+    ptr->identify(ref);
 }
