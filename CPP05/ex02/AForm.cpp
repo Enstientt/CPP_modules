@@ -12,17 +12,14 @@
 
 #include "AForm.hpp"
 
-AForm::AForm():_name("null"), _signed(false),  _gradeS(0), _gradeE(0) {
-std::cout<<"AForm constructor called"<<std::endl;
+AForm::AForm():_name("null"), _signed(false),  _gradeS(1), _gradeE(1) {
 }
 
 AForm::~AForm(){
-    std::cout<<"AForm destructor called"<<std::endl;
 }
 
 AForm::AForm(std::string name,  int gradeE, int gradeS) : _name(name), _gradeS(gradeS), _gradeE(gradeE)
 {
-    std::cout<<"AForm constructor called"<<std::endl;
     if (gradeS < 1 || gradeE < 1)
         throw GradeTooHighException();
     if (gradeS> 150 || gradeE > 150)
@@ -76,7 +73,7 @@ void AForm::beSigned(Bureaucrat &bureaucrat)
 {
     try
     {
-        if (this->getGradeS() <= bureaucrat.getGrade())
+        if (this->getGradeS() >= bureaucrat.getGrade())
             this->_signed = true;
         else
             throw GradeTooLowException();

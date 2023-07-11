@@ -6,23 +6,21 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 07:41:56 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/07/04 12:04:59 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/09 15:13:21 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(){
-std::cout<<"Bureaucrat constructor called"<<std::endl;
+Bureaucrat::Bureaucrat():_name("null"){
 }
 
 Bureaucrat::~Bureaucrat(){
-    std::cout<<"Bureaucrat destructor called"<<std::endl;
 }
 
 Bureaucrat::Bureaucrat(std::string name,  int grade  ) : _name(name) ,_grade(grade)
 {
-    std::cout<<"Bureaucrat constructor called"<<std::endl;
     if (grade < 1)
         throw GradeTooHighException();
     if (grade > 150)
@@ -30,7 +28,7 @@ Bureaucrat::Bureaucrat(std::string name,  int grade  ) : _name(name) ,_grade(gra
 }
 
 
-Bureaucrat & Bureaucrat::operator=(Bureaucrat & copy){
+Bureaucrat & Bureaucrat::operator=(Bureaucrat const &copy){
     if (this != &copy)
     {
         this->_grade = copy._grade;

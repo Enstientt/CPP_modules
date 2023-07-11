@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 07:42:03 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/07/04 16:33:10 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:14:02 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main()
         form.beSigned(bureaucrat);
         std::cout<<"******"<<std::endl;
         bureaucrat.signForm(form);
-        // std::cout << form<<std::endl;
+        std::cout << form<<std::endl;
     }
     catch(const std::exception& e)
     {
@@ -36,7 +36,7 @@ int main()
         form.beSigned(bureaucrat);
         std::cout<<"******"<<std::endl;
         bureaucrat.signForm(form);
-        // std::cout << form<<std::endl;
+        std::cout << form<<std::endl;
     }
     catch(const std::exception& e)
     {

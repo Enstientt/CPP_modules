@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 14:31:26 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/07/03 15:48:19 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/09 15:07:42 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,13 @@
 class PresidentialPardonForm: public AForm{
     private:
         const std::string _target;
-        PresidentialPardonForm();
     public:
+        PresidentialPardonForm();
         virtual ~PresidentialPardonForm();
         PresidentialPardonForm(PresidentialPardonForm const &copy);
         PresidentialPardonForm(std::string target);
         PresidentialPardonForm & operator=(PresidentialPardonForm const &copy);
         std::string getTarget() const;
-        virtual void execute(Bureaucrat const & executor) const;
-        class GradeTooLowException: public std::exception
-        {
-            public:
-                virtual const char* what() const throw();
-        };
-        class GradeTooHighException: public std::exception
-        {
-            public:
-                virtual const char* what() const throw();
-        };
+        void execute(Bureaucrat const & executor) const;
 };
 #endif

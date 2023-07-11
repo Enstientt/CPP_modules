@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 14:31:33 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/07/03 15:48:50 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/09 15:07:50 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,13 @@
 class ShrubberyCreationForm : public AForm{
     private:
         const std::string _target;
-        ShrubberyCreationForm();
     public:
+        ShrubberyCreationForm();
         virtual ~ShrubberyCreationForm();
         ShrubberyCreationForm(ShrubberyCreationForm const &copy);
         ShrubberyCreationForm(std::string target);
         ShrubberyCreationForm & operator=(ShrubberyCreationForm const &copy);
         std::string getTarget() const;
-        virtual void execute(Bureaucrat const & executor) const;
-        class GradeTooLowException: public std::exception
-        {
-            public:
-                virtual const char* what() const throw();
-        };
-        class GradeTooHighException: public std::exception
-        {
-            public:
-                virtual const char* what() const throw();
-        };
+        void execute(Bureaucrat const & executor) const;
 };
 #endif

@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 07:42:00 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/07/04 16:31:55 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:05:11 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class Bureaucrat{
         void incrementGrade();
         void decrementGrade();
         void signForm(Form &form);
-        Bureaucrat & operator=(Bureaucrat & copy);
+        Bureaucrat & operator=(Bureaucrat const &copy);
         class GradeTooLowException: public std::exception
         {
             public:

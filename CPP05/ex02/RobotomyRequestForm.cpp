@@ -6,14 +6,14 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 14:31:28 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/07/03 15:48:43 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/10 15:43:06 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
 #include <cstdlib>
 
-RobotomyRequestForm::RobotomyRequestForm()
+RobotomyRequestForm::RobotomyRequestForm():AForm("RobotomyRequestForm", 72, 45), _target("Null")
 {
 }
 
@@ -38,7 +38,9 @@ RobotomyRequestForm & RobotomyRequestForm::operator=(RobotomyRequestForm const &
 void RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
     if (executor.getGrade() > this->getGradeE())
-        throw AForm::GradeTooLowException();
+        throw GradeTooLowException();
+    if (this->getSigne() == false)
+        throw NotSignedException();
     std::cout<< "some drilling noises"<<std::endl;
     srand((unsigned) time(NULL));
     int i = rand() % 2;

@@ -12,17 +12,14 @@
 
 #include "AForm.hpp"
 
-AForm::AForm():_name("null"), _signed(false),_gradeS(0),  _gradeE(0) {
-std::cout<<"AForm constructor called"<<std::endl;
+AForm::AForm():_name("null"), _signed(false),_gradeS(1),  _gradeE(1) {
 }
 
 AForm::~AForm(){
-    std::cout<<"AForm destructor called"<<std::endl;
 }
 
 AForm::AForm(std::string name,  int gradeE, int gradeS) : _name(name), _gradeS(gradeS), _gradeE(gradeE)
 {
-    std::cout<<"AForm constructor called"<<std::endl;
     if (gradeS < 1 || gradeE < 1)
         throw GradeTooHighException();
     if (gradeS> 150 || gradeE > 150)
@@ -57,27 +54,17 @@ int AForm::getGradeE() const{
 bool AForm::getSigne() const {
     return this->_signed;
 }
-// void AForm::decrementGrade(){
-//     if (this->_gradeE > 150)
-//         throw "grade out of range (min)"; 
-//     this->_grade++;
-// }
-
-// void AForm::incrementGrade(){
-//     if (this->_grade - 1 < 1)
-//         throw "grade out of range (max)"; 
-//     this->_grade--;
-// }
 
 const char* AForm::GradeTooLowException::what() const throw()
     {
-         return "grade too low (bigger than 150).";
+         return "grade too low";
     }
 
 const char* AForm::GradeTooHighException::what() const throw()
     {
-         return "grade too high (smaller than 1).";
+         return "grade too high";
     }
+
 const char* AForm::NotSignedException::what() const throw()
     {
          return "form not signed.";
@@ -87,7 +74,7 @@ void AForm::beSigned(Bureaucrat &bureaucrat)
 {
     try
     {
-        if (this->getGradeS() <= bureaucrat.getGrade())
+        if (this->getGradeS() >= bureaucrat.getGrade())
             this->_signed = true;
         else
             throw GradeTooLowException();

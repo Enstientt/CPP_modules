@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+//this is the latest version
 #ifndef Form_HPP
 #define Form_HPP
 # include "Bureaucrat.hpp"
@@ -20,8 +21,8 @@ class Form{
         const int _gradeE;
         const int _gradeS;
         bool _signed;
-        Form();
     public:
+        Form();
         ~Form();
         Form(const Form &copy);
         Form(std::string name, int gradeE, int gradeS);

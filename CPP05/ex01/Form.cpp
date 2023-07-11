@@ -6,23 +6,21 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 07:51:47 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/07/04 16:34:22 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/10 11:02:29 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 
-Form::Form() : _name("null") , _gradeE(0), _gradeS(0), _signed(0)
+Form::Form() : _name("null") , _gradeE(1), _gradeS(1), _signed(false)
 {
 }
 
 Form::~Form(){
-    std::cout<<"Form destructor called"<<std::endl;
 }
 
 Form::Form(std::string name,  int gradeE, int gradeS) : _name(name) , _gradeE(gradeE), _gradeS(gradeS), _signed(false)
 {
-    std::cout<<"Form constructor called"<<std::endl;
     if (gradeS < 1 || gradeE < 1)
         throw GradeTooHighException();
     if (gradeS> 150 || gradeE > 150)
@@ -72,14 +70,14 @@ void Form::beSigned(Bureaucrat &bureaucrat)
 {
     try
     {
-        if (this->getGradeS() <= bureaucrat.getGrade())
+        if (this->getGradeS() >= bureaucrat.getGrade())
             this->_signed = true;
         else
             throw GradeTooLowException();
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() <<std::endl;
+        std::cout << e.what() <<std::endl;
     }
     
 }

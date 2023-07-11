@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 14:31:29 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/06/26 23:22:52 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/05 14:18:18 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,5 @@ class RobotomyRequestForm : public AForm{
         RobotomyRequestForm & operator=(RobotomyRequestForm const &copy);
         std::string getTarget() const;
         virtual void execute(Bureaucrat const & executor) const;
-        class GradeTooLowException: public std::exception
-        {
-            public:
-                virtual const char* what() const throw();
-        };
-        class GradeTooHighException: public std::exception
-        {
-            public:
-                virtual const char* what() const throw();
-        };
 };
 #endif

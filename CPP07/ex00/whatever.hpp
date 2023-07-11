@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   whatever.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/06 07:42:03 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/07/10 16:37:15 by zessadqu         ###   ########.fr       */
+/*   Created: 2023/07/10 11:36:26 by zessadqu          #+#    #+#             */
+/*   Updated: 2023/07/10 11:40:09 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "AForm.hpp"
-#include "Bureaucrat.hpp"
-#include "Intern.hpp"
+#ifndef WHATEVER_HPP
+#define WHATEVER_HPP
+#include <iostream>
 
-int main()   
-{
-    Bureaucrat mee("mee", 30);
-    Intern me;
-    AForm   *form;
-    
-    form = me.makeForm("robotomy request", "Bender");
-    if (form == NULL)                     
-        return 1;
-    form->beSigned(mee);
-    mee.executeForm(*form);
-    delete form;  
-    return 0;
-}
+void swap()
+#endif
