@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/10 11:36:26 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/07/13 09:39:55 by zessadqu         ###   ########.fr       */
+/*   Created: 2023/07/13 09:41:32 by zessadqu          #+#    #+#             */
+/*   Updated: 2023/07/13 17:56:43 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WHATEVER_HPP
-#define WHATEVER_HPP
+#ifndef ITER_HPP
+#define ITER_HPP
+#include <array>
 #include <iostream>
-template <typename T>
-T max(T x1, T x2){
-    return (x1 > x2) ? x1:x2;
-};
 
-template <typename T>
-T min(T x1, T x2){
-    return (x1 > x2) ? x2:x1;
-};
-
+using namespace std;
 template <typename T>
 
-void swap(T &x1, T &x2)
-{
-    T tmp;
+// void iter(std::array<T, 3>, int len, void (*f( T &elem))){
+//     for (int i =0 ;i < len; i++)
+//         f(array[i]);
+// };
 
-    tmp = x1;
-    x1 = x2 ; 
-    x2 = tmp;    
-};
 #endif
