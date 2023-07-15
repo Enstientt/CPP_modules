@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 09:41:35 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/07/13 17:58:18 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/14 20:08:38 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void  f(int &x){
     x++;
 }
 int main(){
-   // int len = 3;
-    array<int , 3> ar = {1, 2 ,3};
-    std::cout<<ar[2];
+    int len = 3;
+    int ar[] = {1, 2 ,3};
+    iter(ar,len, f);
 }

@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 19:43:52 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/06/28 13:25:51 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/15 15:00:37 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@
 
 class ScalarConverter
 {
-    public:
-        static void    convert(std::string param);
+    private:
+        ScalarConverter();
+        ScalarConverter(const ScalarConverter &copy);
+        ScalarConverter & operator=(const ScalarConverter &copy);
+        ~ScalarConverter();
         static bool    isSpecialFloat(const std::string& param);
         static bool    isSpecialDouble(const std::string& param);
         static bool    isChar(const std::string& param);
@@ -35,6 +38,9 @@ class ScalarConverter
         static void    handleFloat(const std::string& param);
         static void    handleDouble(const std::string& param);
         static void    handleInt(const std::string& param);
+    public:
+        static void    convert(std::string param);
+    
 };
 
 #endif

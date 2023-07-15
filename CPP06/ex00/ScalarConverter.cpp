@@ -6,11 +6,23 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 19:43:49 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/07/07 13:28:13 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/15 15:05:15 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
+
+ScalarConverter::ScalarConverter(){}
+
+ScalarConverter::ScalarConverter(ScalarConverter const &copy)
+{
+    (void)copy;
+}
+ScalarConverter::~ScalarConverter(){}
+
+ScalarConverter & ScalarConverter::operator=(ScalarConverter const &copy){
+    (void)copy;
+}
 
 bool ScalarConverter::isSpecialFloat(const std::string& param)
 {
