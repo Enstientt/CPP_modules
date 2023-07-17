@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 19:43:49 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/07/16 09:50:10 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/17 16:42:47 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,21 +108,24 @@ void ScalarConverter::handleChar(const std::string& param)
 void ScalarConverter::handleFloat(const std::string& param)
 {
     float num =std::stof(param);
-    
+    int tmp = static_cast<int>(num);
+    (tmp >= 32 || tmp <128)? std::cout << "char: " << static_cast<char>(tmp) << std::endl : \
     std::cout << "char: Non displayable\n";
     std::cout << "int: " << static_cast<int>(num) << std::endl;
-    std::cout << "float: " << static_cast<float>(num) << "f" << std::endl;
-    std::cout << "double: " << static_cast<double>(num) << std::endl;
+    (param.find(".")== std::string::npos)?std::cout<<"float: "<< static_cast<float>(num) << ".0f" << std::endl: \
+    std::cout << "float: " << static_cast<float>(num) << ".0f" << std::endl;
+    std::cout << "double: " << static_cast<double>(num) << ".0" << std::endl;
 }
 
 void ScalarConverter::handleDouble(const std::string& param)
 {
     double num = std::stod(param);
-    
+     int tmp = static_cast<int>(num);
+    (tmp >= 32 || tmp <128)? std::cout << "char: " << static_cast<char>(tmp) << std::endl : \
     std::cout << "char: Non displayable\n";
     std::cout << "int: " << static_cast<int>(num) << std::endl;
-    std::cout << "float: " << static_cast<float>(num) << "f" << std::endl;
-    std::cout << "double: " << static_cast<double>(num) << std::endl;
+    std::cout << "float: " << static_cast<float>(num) << ".0f" << std::endl;
+    std::cout << "double: " << static_cast<double>(num)<< ".0" << std::endl;;
 }
 
 void ScalarConverter::handleInt(const std::string& param)
@@ -141,6 +144,7 @@ void ScalarConverter::handleInt(const std::string& param)
 
 void ScalarConverter::convert(std::string param)
 {
+    
     if (isSpecialFloat(param))
     {
         handleSpecialFloat(param);
