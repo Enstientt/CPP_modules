@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 19:43:49 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/07/17 18:07:05 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/17 18:10:15 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,8 @@ void ScalarConverter::handleFloat(const std::string& param)
     (tmp >= 32 || tmp <128)? std::cout << "char: " << static_cast<char>(tmp) << std::endl : \
     std::cout << "char: Non displayable\n";
     std::cout << "int: " << static_cast<int>(num) << std::endl;
-    (param.find(".")== std::string::npos)?std::cout<<"float: "<< static_cast<float>(num) << ".0f" << std::endl: \
-    std::cout << "float: " << static_cast<float>(num) << ".0f" << std::endl;
-    std::cout << "double: " << static_cast<double>(num) << ".0" << std::endl;
+    std::cout << "float: " << static_cast<float>(num) << strf << std::endl;
+    std::cout << "double: " << static_cast<double>(num) << strd << std::endl;
 }
 
 void ScalarConverter::handleDouble(const std::string& param)
