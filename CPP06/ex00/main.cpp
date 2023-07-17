@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 19:43:46 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/07/15 15:06:08 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/16 09:51:10 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int main(int ac, char **av)
         }
         catch(const std::exception& e)
         {
+            std::cout<< e.what()<<std::endl;
         }
         
     }
