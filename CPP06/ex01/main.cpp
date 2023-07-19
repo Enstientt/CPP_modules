@@ -6,7 +6,7 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 18:36:46 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/07/07 18:58:11 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/19 15:31:40 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int main()
      uintptr_t ptt = Serialization::serialize(raw);
     std::cout<<"**" <<typeid(pt).name()<<std::endl;
     std::cout<<"***" <<typeid(ptt).name()<<std::endl;
+    std::cout<<typei
     
 }
