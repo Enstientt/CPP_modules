@@ -1,8 +1,8 @@
 NAME = main
 
-SRCS =  Base.cpp main.cpp
+SRCS =   main.cpp
 
-HEADERS = Base.hpp
+HEADERS = Array.hpp
 
 OBJS = $(SRCS:.cpp=.o)
 
