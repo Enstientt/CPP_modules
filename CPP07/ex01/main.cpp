@@ -6,15 +6,18 @@
 /*   By: zessadqu <zessadqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 09:41:35 by zessadqu          #+#    #+#             */
-/*   Updated: 2023/07/14 20:08:38 by zessadqu         ###   ########.fr       */
+/*   Updated: 2023/07/22 12:30:05 by zessadqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "iter.hpp"
 
-void  f(int &x){
-    x++;
+template <typename T>
+
+void  f(T &x){
+    std::cout << x << std::endl;
 }
+
 int main(){
     int len = 3;
     int ar[] = {1, 2 ,3};
