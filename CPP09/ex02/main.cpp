@@ -99,7 +99,7 @@ int main(int ac, char *av[])
             dec.push_back(std::make_pair(std::atof(av[i]), std::atof(av[i + 1])));
         }
     }
-    std::list<unsigned int> dec_a, dec_b;
-    algo(ac, av, dec, dec_a, dec_b, 'd');
+    // std::list<unsigned int> dec_a, dec_b;
+    // algo(ac, av, dec, dec_a, dec_b, 'd');
 }
 
