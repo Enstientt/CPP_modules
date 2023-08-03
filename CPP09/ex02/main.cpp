@@ -41,7 +41,7 @@ void algo(int ac, char *av[], T &container, S &cont, V &conta, char choice)
 
     end = clock();
     diff = (double)(end - start) / CLOCKS_PER_SEC;
-    if (choice == 'v')
+    if (choice == 'l')
         std::cout << "\nTime to process a range of " << ac << " elements with std::list : " << diff * 1000000 << " us" << "\n";
     if (choice == 'd')
         std::cout << "\nTime to process a range of " << ac << " elements with std::deque : " << diff * 1000000 << " us" << "\n";
