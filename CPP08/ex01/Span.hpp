@@ -26,6 +26,7 @@ class Span
         void addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end);
         int shortestSpan();
         int longestSpan();
+        std::vector<int> getvect();
         class FullException : public std::exception
         {
             public:

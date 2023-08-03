@@ -28,7 +28,7 @@ void Span::addNumber(int n)
     if (this->_v.size() < this->_n)
         this->_v.push_back(n);
     else
-        throw Span::FullException();
+        throw Span::FullException(); 
 }
 
 void Span::addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end)
@@ -37,6 +37,10 @@ void Span::addNumber(std::vector<int>::iterator begin, std::vector<int>::iterato
         this->_v.insert(this->_v.end(), begin, end);
     else
         throw Span::FullException();
+}
+
+std::vector<int> Span::getvect(){
+    return this->_v;
 }
 
 int Span::shortestSpan()

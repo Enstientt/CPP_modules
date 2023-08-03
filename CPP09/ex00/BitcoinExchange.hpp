@@ -12,15 +12,17 @@
 
 class BitcoinExchange{
     private :
-        std::map<std::string, float> _data;
+        std::map<int, float> _data;
     public:
         BitcoinExchange();
         BitcoinExchange(BitcoinExchange const & copy);
         BitcoinExchange &operator=(BitcoinExchange const &rh);
-        void addPrice(std::string date, float price);
-        std::map<std::string, float> getData() const {return this->_data;};
-        float ExchangeRate(std::string date) const;
+        void addPrice(int date, float price);
+        std::map<int, float> getData() const {return this->_data;};
+        float ExchangeRate(std::string date);
         ~BitcoinExchange();
-    static int compare(std::string str1, std::string str2);
+    int compareStr(std::string str1, std::string str2);
+    int calculateDaysSinceEpoch(const std::string& date);
+    static int dateToInt(std::string date);
 };
 #endif
