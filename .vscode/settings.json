@@ -71,6 +71,8 @@
         "stack": "cpp",
         "list": "cpp",
         "map": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "__functional_03": "cpp",
+        "__tree": "cpp"
     }
 }
