@@ -4,49 +4,104 @@
 #include <cstdlib>
 #include <cstring>
 #include <sys/time.h>
-#include <deque>
+#include <vector>
 
 bool flag = false;
 unsigned int tmp;
-
-template <typename T, typename S, typename V>
-void algo(int ac, char *av[], T &container, S &cont, V &conta, char choice)
+void checkInput(char *av1, char *av2);
+void algo_list(int ac, char *av[])
 {
     clock_t start, end;
     double diff;
     (void)av;
     start = clock();
-    for (typename T::iterator it = container.begin(); it != container.end(); ++it)
+
+    std::list<std::pair<unsigned int, unsigned int> > lst;
+    for (int i = 1; i < ac - 1; i += 2)
+    {
+        if (isdigit(*av[i]) )
+        {
+            checkInput(av[i], av[i + 1]);
+            lst.push_back(std::make_pair(std::atof(av[i]), std::atof(av[i + 1])));
+        }
+    }
+
+    for (std::list<std::pair<unsigned int, unsigned int> >::iterator it = lst.begin(); it != lst.end(); ++it)
     {
         if ((*it).first > (*it).second)
             std::swap((*it).first, (*it).second);
     }
 
-    for (typename T::iterator it = container.begin(); it != container.end(); ++it)
-        conta.push_back((*it).first);
+    std::list<unsigned int> lst_a, lst_b;
+    for (std::list<std::pair<unsigned int, unsigned int> >::iterator it = lst.begin(); it != lst.end(); ++it)
+        lst_a.push_back((*it).first);
 
-    for (typename T::iterator it = container.begin(); it != container.end(); ++it)
-        cont.push_back((*it).second);
+    for (std::list<std::pair<unsigned int, unsigned int> >::iterator it = lst.begin(); it != lst.end(); ++it)
+        lst_b.push_back((*it).second);
 
-    conta.sort();
+    lst_a.sort();
 
-    for (typename S::iterator it = cont.begin(); it != cont.end(); ++it)
-        conta.insert(std::lower_bound(conta.begin(), conta.end(), *it), *it);
+    for (std::list<unsigned int>::iterator it = lst_b.begin(); it != lst_b.end(); ++it)
+        lst_a.insert(std::lower_bound(lst_a.begin(), lst_a.end(), *it), *it);
+    
     if (flag)
-        conta.insert(std::lower_bound(conta.begin(), conta.end(), tmp), tmp);
+        lst_a.insert(std::lower_bound(lst_a.begin(), lst_a.end(), tmp), tmp);
 
     std::cout << "\nAfter  : ";
-    for (typename V::iterator it = conta.begin(); it != conta.end(); ++it)
+    for (std::list<unsigned int>::iterator it = lst_a.begin(); it != lst_a.end(); ++it)
         std::cout << *it << " ";
 
     end = clock();
     diff = (double)(end - start) / CLOCKS_PER_SEC;
-    if (choice == 'l')
-        std::cout << "\nTime to process a range of " << ac << " elements with std::list : " << diff * 1000000 << " us" << "\n";
-    if (choice == 'd')
-        std::cout << "\nTime to process a range of " << ac << " elements with std::deque : " << diff * 1000000 << " us" << "\n";
+    std::cout << "\nTime to process a range of " << ac << " elements with std::list : " << diff * 1000000 << " us" << "\n";
 }
 
+void algo_vector(int ac, char *av[])
+{
+    clock_t start, end;
+    double diff;
+    (void)av;
+    start = clock();
+
+    std::vector<std::pair<unsigned int, unsigned int> > vec;
+    for (int i = 1; i < ac - 1; i += 2)
+    {
+        if (isdigit(*av[i]))
+        {
+            checkInput(av[i], av[i + 1]);
+            vec.push_back(std::make_pair(std::atof(av[i]), std::atof(av[i + 1])));
+        }
+    }
+
+    for (std::vector<std::pair<unsigned int, unsigned int> >::iterator it = vec.begin(); it != vec.end(); ++it)
+    {
+        if ((*it).first > (*it).second)
+            std::swap((*it).first, (*it).second);
+    }
+
+    std::vector<unsigned int> vec_a, vec_b;
+    for (std::vector<std::pair<unsigned int, unsigned int> >::iterator it = vec.begin(); it != vec.end(); ++it)
+        vec_a.push_back((*it).first);
+
+    for (std::vector<std::pair<unsigned int, unsigned int> >::iterator it = vec.begin(); it != vec.end(); ++it)
+        vec_b.push_back((*it).second);
+
+    std::sort(vec_a.begin(), vec_a.end());
+
+    for (std::vector<unsigned int>::iterator it = vec_b.begin(); it != vec_b.end(); ++it)
+        vec_a.insert(std::lower_bound(vec_a.begin(), vec_a.end(), *it), *it);
+
+    if (flag)
+        vec_a.insert(std::lower_bound(vec_a.begin(), vec_a.end(), tmp), tmp);
+
+    std::cout << "\nAfter  : ";
+    for (std::vector<unsigned int>::iterator it = vec_a.begin(); it != vec_a.end(); ++it)
+        std::cout << *it << " ";
+
+    end = clock();
+    diff = (double)(end - start) / CLOCKS_PER_SEC;
+    std::cout << "\nTime to process a range of " << ac << " elements with std::vector : " << diff * 1000000 << " us" << "\n";
+}
 void checkInput(char *av1, char *av2)
 {
     if (std::atoi(av1) < 0 || std::atoi(av2) < 0)
@@ -58,48 +113,61 @@ void checkInput(char *av1, char *av2)
 
 int main(int ac, char *av[])
 {
-    if ((ac - 1) % 2 != 0)
-    {
-        flag = true;
-        tmp = std::atof(av[ac - 1]);
-        if (std::atof(av[ac - 1]) < 0)
-            exit(1);
-        ac -= 1;
-    }
+    // ... (same as before)
+    
 
-    std::cout << "Before : ";
-    if (ac < 6)
-    {
-        for (int i = 1; i < ac; i++)
-            std::cout << av[i] << " ";
-    }
-    else
-    {
-        for (int i = 1; i < 6; i++)
-            std::cout << av[i] << " ";
-        std::cout << "[...]";
-    }
-    std::list<std::pair<unsigned int, unsigned int> > lst;
-    for (int i = 1; i < ac; i += 2)
-    {
-        if (isdigit(*av[i]))
-        {
-            checkInput(av[i], av[i + 1]);
-            lst.push_back(std::make_pair(std::atof(av[i]), std::atof(av[i + 1])));
-        }
-    }
-    std::list<unsigned int> lst_a, lst_b;
-    algo(ac, av, lst, lst_a, lst_b, 'l');
-    std::list<std::pair<unsigned int, unsigned int> > dec;
-    for (int i = 1; i < ac; i += 2)
-    {
-        if (isdigit(*av[i]))
-        {
-            checkInput(av[i], av[i + 1]);
-            dec.push_back(std::make_pair(std::atof(av[i]), std::atof(av[i + 1])));
-        }
-    }
-    // std::deque<unsigned int> dec_a, dec_b;
-    // algo(ac, av, dec, dec_a, dec_b, 'd');
+    algo_list(ac, av);
+    algo_vector(ac, av);
+
+    // ... (same as before)
 }
+
+
+
+// int main(int ac, char *av[])
+// {
+//     if ((ac - 1) % 2 != 0)
+//     {
+//         flag = true;
+//         tmp = std::atof(av[ac - 1]);
+//         if (std::atof(av[ac - 1]) < 0)
+//             exit(1);
+//         ac -= 1;
+//     }
+
+//     std::cout << "Before : ";
+//     if (ac < 6)
+//     {
+//         for (int i = 1; i < ac; i++)
+//             std::cout << av[i] << " ";
+//     }
+//     else
+//     {
+//         for (int i = 1; i < 6; i++)
+//             std::cout << av[i] << " ";
+//         std::cout << "[...]";
+//     }
+//     std::list<std::pair<unsigned int, unsigned int> > lst;
+//     for (int i = 1; i < ac; i += 2)
+//     {
+//         if (isdigit(*av[i]))
+//         {
+//             checkInput(av[i], av[i + 1]);
+//             lst.push_back(std::make_pair(std::atof(av[i]), std::atof(av[i + 1])));
+//         }
+//     }
+//     std::list<unsigned int> lst_a, lst_b;
+//     algo(ac, av, lst, lst_a, lst_b, 'l');
+//     std::list<std::pair<unsigned int, unsigned int> > dec;
+//     for (int i = 1; i < ac; i += 2)
+//     {
+//         if (isdigit(*av[i]))
+//         {
+//             checkInput(av[i], av[i + 1]);
+//             dec.push_back(std::make_pair(std::atof(av[i]), std::atof(av[i + 1])));
+//         }
+//     }
+//     std::vector<unsigned int> dec_a, dec_b;
+//     algo(ac, av, dec, dec_a, dec_b, 'd');
+// }
 
