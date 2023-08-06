@@ -8,23 +8,23 @@
 
 bool flag = false;
 unsigned int tmp;
-void checkInput(char *av1, char *av2);
+void checkInput(char **av, int ac);
 void algo_list(int ac, char *av[])
 {
     clock_t start, end;
     double diff;
     (void)av;
     start = clock();
-
+    
     std::list<std::pair<unsigned int, unsigned int> > lst;
-    for (int i = 1; i < ac - 1; i += 2)
+    if (ac%2==0)
     {
-        if (isdigit(*av[i]) )
-        {
-            checkInput(av[i], av[i + 1]);
-            lst.push_back(std::make_pair(std::atof(av[i]), std::atof(av[i + 1])));
-        }
+        flag = true;
+        tmp = std::atof(av[ac - 1]);
     }
+    checkInput(av, ac);
+    for (int i = 1; i < ac - 1; i += 2)
+            lst.push_back(std::make_pair(std::atof(av[i]), std::atof(av[i + 1])));
 
     for (std::list<std::pair<unsigned int, unsigned int> >::iterator it = lst.begin(); it != lst.end(); ++it)
     {
@@ -46,14 +46,14 @@ void algo_list(int ac, char *av[])
     
     if (flag)
         lst_a.insert(std::lower_bound(lst_a.begin(), lst_a.end(), tmp), tmp);
-
+    
     std::cout << "\nAfter  : ";
     for (std::list<unsigned int>::iterator it = lst_a.begin(); it != lst_a.end(); ++it)
         std::cout << *it << " ";
 
     end = clock();
     diff = (double)(end - start) / CLOCKS_PER_SEC;
-    std::cout << "\nTime to process a range of " << ac << " elements with std::list : " << diff * 1000000 << " us" << "\n";
+    std::cout << "\nTime to process a range of " << ac - 1 << " elements with std::list : " << diff * 1000000 << " us" << "\n";
 }
 
 void algo_vector(int ac, char *av[])
@@ -64,14 +64,14 @@ void algo_vector(int ac, char *av[])
     start = clock();
 
     std::vector<std::pair<unsigned int, unsigned int> > vec;
-    for (int i = 1; i < ac - 1; i += 2)
+    checkInput(av, ac);
+    if (ac%2==0)
     {
-        if (isdigit(*av[i]))
-        {
-            checkInput(av[i], av[i + 1]);
-            vec.push_back(std::make_pair(std::atof(av[i]), std::atof(av[i + 1])));
-        }
+        flag = true;
+        tmp = std::atof(av[ac - 1]);
     }
+    for (int i = 1; i < ac - 1; i += 2)
+        vec.push_back(std::make_pair(std::atof(av[i]), std::atof(av[i + 1])));
 
     for (std::vector<std::pair<unsigned int, unsigned int> >::iterator it = vec.begin(); it != vec.end(); ++it)
     {
@@ -100,26 +100,37 @@ void algo_vector(int ac, char *av[])
 
     end = clock();
     diff = (double)(end - start) / CLOCKS_PER_SEC;
-    std::cout << "\nTime to process a range of " << ac << " elements with std::vector : " << diff * 1000000 << " us" << "\n";
+    std::cout << "\nTime to process a range of " << ac - 1 << " elements with std::vector : " << diff * 1000000 << " us" << "\n";
 }
-void checkInput(char *av1, char *av2)
+void checkInput(char **av, int ac)
 {
-    if (std::atoi(av1) < 0 || std::atoi(av2) < 0)
+    int j;
+    for (int i = 1; i < ac; i++)
     {
-        std::cerr << "Invalid Input: Number Less Than 0\n";
-        exit(0);
+        /* code */
+        j = 0;
+        while(av[i][j])
+        {
+            if(!isdigit(av[i][j]))
+            {
+                std::cerr<<"invalid input \n";
+                exit(0);
+            }
+            j++;
+        }
+        if (std::atof(av[i]) < 0)
+        {
+            std::cerr << "Invalid Input: Number Less Than 0\n";
+            exit(0);
+        }
     }
+    
 }
 
 int main(int ac, char *av[])
 {
-    // ... (same as before)
-    
-
     algo_list(ac, av);
     algo_vector(ac, av);
-
-    // ... (same as before)
 }
 
 
