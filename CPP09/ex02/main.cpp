@@ -47,13 +47,13 @@ void algo_list(int ac, char *av[])
     if (flag)
         lst_a.insert(std::lower_bound(lst_a.begin(), lst_a.end(), tmp), tmp);
     
+    end = clock();
     std::cout << "\nAfter  : ";
     for (std::list<unsigned int>::iterator it = lst_a.begin(); it != lst_a.end(); ++it)
         std::cout << *it << " ";
 
-    end = clock();
     diff = (double)(end - start) / CLOCKS_PER_SEC;
-    std::cout << "\nTime to process a range of " << ac - 1 << " elements with std::list : " << diff * 1000000 << " us" << "\n";
+    std::cout << "\nTime to process a range of " << ac - 1 << " elements with std::list : " << diff << " us" << "\n";
 }
 
 void algo_vector(int ac, char *av[])
@@ -95,12 +95,28 @@ void algo_vector(int ac, char *av[])
         vec_a.insert(std::lower_bound(vec_a.begin(), vec_a.end(), tmp), tmp);
 
     std::cout << "\nAfter  : ";
+    if (ac<6)
+    {
+
     for (std::vector<unsigned int>::iterator it = vec_a.begin(); it != vec_a.end(); ++it)
         std::cout << *it << " ";
+    }
+    else
+    {
+        int i = 0;
+        for (std::vector<unsigned int>::iterator it = vec_a.begin(); it != vec_a.end(); ++it)
+        {
+                std::cout << *it << " ";
+                i++;
+            if (i == 5)
+                break;
+        }
+        std::cout<< "[...]";
+    }
 
     end = clock();
     diff = (double)(end - start) / CLOCKS_PER_SEC;
-    std::cout << "\nTime to process a range of " << ac - 1 << " elements with std::vector : " << diff * 1000000 << " us" << "\n";
+    std::cout << "\nTime to process a range of " << ac - 1 << " elements with std::vector : " << diff<< " us" << "\n";
 }
 void checkInput(char **av, int ac)
 {
