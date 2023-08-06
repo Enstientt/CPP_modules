@@ -23,6 +23,13 @@ class BitcoinExchange{
         ~BitcoinExchange();
     int compareStr(std::string str1, std::string str2);
     int calculateDaysSinceEpoch(const std::string& date);
-    static int dateToInt(std::string date);
+    static bool validDate(std::string date);
+    void validateData();
+    bool isDouble(const std::string& s) {
+    std::istringstream iss(s);
+    double num;
+    char c;
+    return (iss >> num) && !(iss >> c);  // Check if conversion succeeds and no extra characters are left
+}
 };
 #endif
