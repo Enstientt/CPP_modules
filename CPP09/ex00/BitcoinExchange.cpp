@@ -83,19 +83,19 @@ int BitcoinExchange::compareStr(std::string date,std::string date2){
 {
     if (date.length() != 10)
     {
-        std::cout << "Error: bad input => "<<date << std::endl;
+        std::cout << "Error: bad input  => "<<date << std::endl;
         return false;
     }
     if (date[4] != '-' || date[7] != '-')
     {
-        std::cout << "Error: bad input => "<<date << std::endl;
+        std::cout << "Error: bad input  => "<<date << std::endl;
         return false;
     }
     for (int i = 0; i < 4; i++)
     {
         if (!isdigit(date[i]))
         {
-            std::cout << "Error: bad input => "<<date << std::endl;
+            std::cout << "Error: bad input  => "<<date << std::endl;
             return false;
         }
     }
@@ -103,7 +103,7 @@ int BitcoinExchange::compareStr(std::string date,std::string date2){
     {
         if (!isdigit(date[i]))
         {
-            std::cout << "Error: bad input => "<<date << std::endl;
+            std::cout << "Error: bad input  => "<<date << std::endl;
             return false;
         }
     }
@@ -111,7 +111,7 @@ int BitcoinExchange::compareStr(std::string date,std::string date2){
     {
         if (!isdigit(date[i]))
         {
-            std::cout << "Error: bad input => "<<date << std::endl;
+            std::cout << "Error: bad input  => "<<date << std::endl;
             return false;
         }
     }
@@ -121,12 +121,12 @@ int BitcoinExchange::compareStr(std::string date,std::string date2){
     std::string day = date.substr(8, 2);
     if (year.length() != 4 || month.length() != 2 || day.length() != 2)
     {
-        std::cout << "Error: bad input => "<<date << std::endl;
+        std::cout << "Error: bad input  => "<<date << std::endl;
         return false;
     }
     if (std::atof(month.c_str()) > 12 || std::atof(month.c_str()) < 1)
     {
-        std::cout << "Error: bad input => "<<date << std::endl;
+        std::cout << "Error: bad input  => "<<date << std::endl;
         return false;
     }
     int day1 = std::atof(day.c_str());
@@ -135,13 +135,23 @@ int BitcoinExchange::compareStr(std::string date,std::string date2){
     if ((month1==2 && year1%4==0 && (day1 > 29 || day1 < 1))
         || (month1==2 && year1%4!=0 && (day1 > 28 || day1 < 1)))
     {
-        std::cout << "Error: bad input => "<<date << std::endl;
+        std::cout << "Error: bad input  => "<<date << std::endl;
         return false;
     }
 
-    if ((month1%2==1 &&(day1 > 31 || day1 < 1)) || (month1%2==0 &&(day1 > 30 || day1 < 1)))
+    if ((month1==1 || month1==3 \
+        || month1==5 || month1==7 \
+        || month1==8 || month1==10 || month1==12)
+        && (day1 > 31 || day1 < 1))
     {
-        std::cout << "Error: bad input => "<<date << std::endl;
+        std::cout << "Error: bad input  => "<<date << std::endl;
+        return false;
+    }
+    if((month1==4 || month1==6 \
+        || month1==9 || month1==11) \
+        && (day1 > 30 || day1 < 1))
+    {
+        std::cout << "Error: bad input  => "<<date << std::endl;
         return false;
     }
     return true;
@@ -163,10 +173,25 @@ void BitcoinExchange::validateData(){
             std::cout << "Error: bad input in the data base => "<<date << std::endl;
             exit(1);
         }
-        if (!isDouble(price))
+        if (!validDouble(price))
         {
             std::cout << "Error: bad input in the data base => "<<price << std::endl;
             exit(1);
         }
     }
+}
+
+bool BitcoinExchange::validDouble(std::string price){
+    int dout = 0;
+    for (size_t i = 0; i < price.length(); i++){
+        if (i == 0 && (price[i] == '-' || price[i] == '+' ))
+            continue;
+        if (price[i] == '.')
+            dout++;
+        if (dout > 1)
+            return false;
+        if (price[i] != '.' &&  (price[i] < '0' || price[i] > '9'))
+            return false;
+    }
+    return true;
 }

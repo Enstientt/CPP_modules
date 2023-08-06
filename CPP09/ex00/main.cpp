@@ -67,20 +67,20 @@
 //     return true;
 // }
 
-bool validDouble(std::string price){
-    int dout = 0;
-    for (size_t i = 0; i < price.length(); i++){
-        if (i == 0 && (price[i] == '-' || price[i] == '+' ))
-            continue;
-        if (price[i] == '.')
-            dout++;
-        if (dout > 1)
-            return false;
-        if (price[i] != '.' &&  (price[i] < '0' || price[i] > '9'))
-            return false;
-    }
-    return true;
-}
+// bool validDouble(std::string price){
+//     int dout = 0;
+//     for (size_t i = 0; i < price.length(); i++){
+//         if (i == 0 && (price[i] == '-' || price[i] == '+' ))
+//             continue;
+//         if (price[i] == '.')
+//             dout++;
+//         if (dout > 1)
+//             return false;
+//         if (price[i] != '.' &&  (price[i] < '0' || price[i] > '9'))
+//             return false;
+//     }
+//     return true;
+// }
 
 int main(int argc, char **argv)
 {
@@ -120,7 +120,7 @@ int main(int argc, char **argv)
             continue;
         }
         std::getline(ss, price, ' ');
-        if (price.find_first_not_of("+-0123456789.") != std::string::npos || price.empty() || !validDouble(price))
+        if (price.find_first_not_of("+-0123456789.") != std::string::npos || price.empty() || !BitcoinExchange::validDouble(price))
         {
             std::cerr << "Error: invalid price" << std::endl;
             continue;

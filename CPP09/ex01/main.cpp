@@ -3,20 +3,13 @@
 int calculate(int operand1, int operand2, char op)
 {
     if (op == '+')
-        return (operand2 + operand1);
+        return (operand1 + operand2);
     else if (op == '-')
-        return (operand2 - operand1);
+        return (operand1 - operand2);
     else if (op == '*')
         return (operand2 * operand1);
     else if (op == '/')
-    {
-        if (operand2 == 0)
-        {
-            std::cout << "division on zero" << std::endl;
-            exit(1);
-        }
         return (operand1 / operand2);
-    }
     return (0);
 }
 
@@ -46,11 +39,11 @@ std::stack<int> rpn( char *av)
                 exit(1);
             }
 
-            operand1 = stack.top();
-            stack.pop();
             operand2 = stack.top();
             stack.pop();
-            if (av[i] == '/' && operand1== 0)
+            operand1 = stack.top();
+            stack.pop();
+            if (av[i] == '/' && operand2== 0)
             {
                 std::cout << "division on zero" << std::endl;
                 exit(1);
