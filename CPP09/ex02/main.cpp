@@ -1,10 +1,5 @@
-#include <iostream>
-#include <list>
-#include <algorithm>
-#include <cstdlib>
-#include <cstring>
-#include <sys/time.h>
-#include <vector>
+#include "PmergeMe.hpp"
+
 
 bool flag = false;
 unsigned int tmp;
@@ -145,8 +140,17 @@ void checkInput(char **av, int ac)
 
 int main(int ac, char *av[])
 {
-    algo_list(ac, av);
-    algo_vector(ac, av);
+    if (ac < 3)
+    {
+        std::cerr << "Invalid Input: Less Than 2 Numbers\n";
+        exit(0);
+    }
+    else
+    {
+        algo_list(ac, av);
+        algo_vector(ac, av);
+    }
+    return 0;
 }
 
 
