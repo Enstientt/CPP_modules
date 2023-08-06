@@ -1,238 +1,66 @@
 #include "RPN.hpp"
 
-// bool isOperator(std::string str){
-//     if (str == "+" || str == "-" || str == "*" || str == "/" || str == "%")
-//         return true;
-//     return false;
-// }
-
-// bool isNumber(std::string str){
-//     int dout = 0;
-//     for (size_t i = 0; i < str.length(); i++){
-//         if (i == 0 && (str[i] == '-' || str[i] == '+' ))
-//             continue;
-//         if (str[i] == '.')
-//             dout++;
-//         if (dout > 1)
-//             return false;
-//         if (str[i] != '.' &&  (str[i] < '0' || str[i] > '9'))
-//             return false;
-//     }
-//     return true;
-// }
-
-// bool isBrackets(std::string str){
-//     if (str == "(" || str == ")")
-//         return true;
-//     return false;
-// }
-
-// bool isSpace(std::string str){
-//     if (str == " ")
-//         return true;
-//     return false;
-// }
-// int calculate(int a, int b, std::string op){
-//     if (op == "+")
-//         return a + b;
-//     if (op == "-")
-//         return a - b;
-//     if (op == "*")
-//         return a * b;
-//     if (op == "/")
-//         return a / b;
-//     if (op == "%")
-//         return a % b;
-//     return 0;
-// }
-
-// int RPN(std::string str){
-//     std::stack<int> stack;
-//     std::stringstream ss(str);
-//     std::string token;
-//     while (ss >> token){
-//         if (isNumber(token))
-//             stack.push(std::atof(token.c_str()));
-//         else if (isOperator(token)){
-//             if (stack.size() < 2)
-//                 return 0;
-//             int a = stack.top();
-//             stack.pop();
-//             int b = stack.top();
-//             stack.pop();
-//             stack.push(calculate(b, a, token));
-//         }
-//         else if (isBrackets(token))
-//             return 0;
-//         else if (!isSpace(token))
-//             return 0;
-//     }
-//     if (stack.size() != 1)
-//         return 0;
-//     return stack.top();
-// }
-// void check_stack(std::stack<double> calc_stack)
-// {
-//     int count = 0;
-//     int b; 
-//     if (calc_stack.size() < 2)
-//     {
-//         std::cout << "Error: bad input" << std::endl;
-//         exit(1);
-//     }
-//     else
-//     {
-//         while (calc_stack.size() > 0)
-//         {
-//             b = calc_stack.top();
-//             calc_stack.pop();
-//             count++;
-//             if (!isdigit(b) && count % 2 ==0)
-//             {
-//                 std::cout << "Error: bad input" << std::endl;
-//                 exit(1);
-//             }
-//         }
-//         if (count != 1)
-//         {
-//             std::cout << "Error: bad input" << std::endl;
-//             exit(1);
-//         }
-//     }
-// }
-std::stack<char> reverseStack(const std::stack<char> &originalStack) {
-    std::stack<char> reversedStack;
-
-    std::stack<char> copyStack = originalStack; // Create a copy of the original stack
-
-    while (!copyStack.empty()) {
-        reversedStack.push(copyStack.top());
-        copyStack.pop();
-    }
-
-    return reversedStack;
-}
-bool isOperator(char str)
-{
-    if (str == '+' || str == '-' || str == '*' || str == '/')
-        return true;
-    return false;
-}
-
-int calculate(int a, int b, char op)
+int calculate(int operand1, int operand2, char op)
 {
     if (op == '+')
-        return a + b;
-    if (op == '-')
-        return a - b;
-    if (op == '*')
-        return a * b;
-    if (op == '/')
+        return (operand1 + operand2);
+    else if (op == '-')
+        return (operand1 - operand2);
+    else if (op == '*')
+        return (operand1 * operand2);
+    else if (op == '/')
     {
-        if (b == 0)
+        if (operand2 == 0)
         {
-            std::cout << "Error: division by zero" << std::endl;
+            std::cout << "division on zero" << std::endl;
             exit(1);
         }
-        return a / b;
+        return (operand1 / operand2);
     }
-    return 0;
+    return (0);
 }
 
-std::stack<int> preformOperation(std::stack<char> &calc_stack)
+
+std::stack<int> rpn( char *av)
 {
-    int a, b;
-    char op;
-    std::stack<int> intStack;
-    std::stack<char> opStack;
-    while (calc_stack.size())
+    std::stack<int> stack;
+    int i = 0;
+    while (av[i])
     {
-        a = calc_stack.top() - '0';
-        intStack.push(a);
-        calc_stack.pop();
-         b = calc_stack.top() - '0';
-        intStack.push(b);
-        calc_stack.pop();
-        op = calc_stack.top();
-        opStack.push(op);
-        calc_stack.pop();
+        if (isdigit(av[i]))
+            stack.push(av[i] - '0');
+        else if (av[i] == '+' || av[i] == '-' || av[i] == '*' || av[i] == '/' )
+        {
+            if (stack.size() < 2)
+            {
+                std::cout << "Invalid Input" << std::endl;
+                exit(1);
+            }
+            int operand1 = stack.top();
+            stack.pop();
+            int operand2 = stack.top();
+            stack.pop();
+            stack.push(calculate(operand1, operand2, av[i]));
+        }
+        i++;
     }
-    while (opStack.size())
-    {
-        a = intStack.top();
-        intStack.pop();
-        b = intStack.top();
-        intStack.pop();
-        op = opStack.top();
-        opStack.pop();
-        intStack.push(calculate(a, b, op));
-
-    }
-    return intStack;
+    return stack;
 }
 
-int main(int ac, char **av)
+int main(int ac , char **av)
 {
     if (ac != 2)
     {
-        std::cout << "Error: bad input" << std::endl;
-        return 0;
+        std::cout << "Usage: ./RPN [file]" << std::endl;
+        return 1;
     }
-    std::stack<char> calc_stack;
-    std::stringstream ss(av[1]);
-    std::string input;
-    int count = 0;
-    char num;
-    int i = 0;
-    while (getline(ss, input, ' '))
+    std::string input = av[1];
+    if (input.find_first_not_of("+-*/0123456789 ") != std::string::npos)
     {
-        while (input[i] && input[i] == ' ')
-            i++;
-        if (input[i] == '\0')
-            continue;
-        num =input[i];
-        if (num)
-        {
-            if (isdigit(num))
-            {
-                if (count%2 ==0 && count!=0)
-                {
-                    std::cout<<num<<std::endl;
-                    std::cout << "Error: bad input 1" << std::endl;
-                    return 0;
-                }
-                else
-                    calc_stack.push(num);
-                count++;
-            }
-            else if (isOperator(num))
-            {
-                if (count%2!=0 )
-                {
-                    std::cout << "Error: bad input 3" << std::endl;
-                    return 0;
-                }
-                calc_stack.push(num);
-            }
-            else
-            {
-                std::cout << "Error: bad input 4" << std::endl;
-                return 0;
-            }
-        }
-        // else if (isOperator(num) && count%2 ==0)
-        //     calc_stack.push(input[0]);
-        else
-            std::cout << "Error: bad input 3" << std::endl;
+        std::cout << "Invalid Input" << std::endl;
+        return 1;
     }
-     calc_stack = reverseStack(calc_stack);
-    //print the calc_stack
-    // while (calc_stack.size())
-    // {
-    //     std::cout << calc_stack.top() << std::endl;
-    //     calc_stack.pop();
-    // }
-
-    std::cout<<preformOperation(calc_stack).top()<<std::endl;
+    std::stack<int> stack = rpn(av[1]);
+    std::cout<<stack.top()<<std::endl;
     return 0;
 }

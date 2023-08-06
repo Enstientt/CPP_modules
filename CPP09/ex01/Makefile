@@ -1,4 +1,4 @@
-NAME = main
+NAME = RPN
 
 SRCS = main.cpp RPN.cpp
 
