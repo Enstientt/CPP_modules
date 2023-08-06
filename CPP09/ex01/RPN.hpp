@@ -11,5 +11,12 @@
 #include <algorithm>
 #include <stack>
 
+class RPN{
+    public:
+        RPN();
+        ~RPN();
+        RPN(RPN const &other);
+        RPN &operator=(RPN const &other);
+};
 
 #endif

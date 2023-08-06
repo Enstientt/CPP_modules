@@ -109,7 +109,11 @@ int main(int ac, char **av)
     {
         if (std::istringstream(input) >>num )
         {
-            calc_stack.push(num);
+            if (num > 10 || num < 0)
+            {
+                std::cout << "Error: bad input" << std::endl;
+                return 0;
+            }
         }
         else if (isOperator(input))
         {
