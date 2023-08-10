@@ -3,7 +3,30 @@
 
 bool flag = false;
 unsigned int tmp;
-void checkInput(char **av, int ac);
+
+void checkInput(char **av, int ac)
+{
+    int j;
+    for (int i = 1; i < ac; i++)
+    {
+        j = 0;
+        while(av[i][j])
+        {
+            if(!isdigit(av[i][j]))
+            {
+                std::cerr<<"invalid input \n";
+                exit(0);
+            }
+            j++;
+        }
+        if (std::atof(av[i]) < 0 || std::atof(av[i]) > std::numeric_limits<int>::max())
+        {
+            std::cerr << "Invalid Input: the number is out of the positive  integers range \n";
+            exit(0);
+        }
+    } 
+}
+
 void algo_list(int ac, char *av[])
 {
     clock_t start, end;
@@ -12,12 +35,12 @@ void algo_list(int ac, char *av[])
     start = clock();
     
     std::list<std::pair<unsigned int, unsigned int> > lst;
+    checkInput(av, ac);
     if (ac%2==0)
     {
         flag = true;
         tmp = std::atof(av[ac - 1]);
     }
-    checkInput(av, ac);
     for (int i = 1; i < ac - 1; i += 2)
             lst.push_back(std::make_pair(std::atof(av[i]), std::atof(av[i + 1])));
 
@@ -96,92 +119,30 @@ void algo_vector(int ac, char *av[])
     diff = (double)(end - start);
     std::cout << "\nTime to process a range of " << ac - 1 << " elements with std::vector : " << diff<< " us" << "\n";
 }
-void checkInput(char **av, int ac)
-{
-    int j;
-    for (int i = 1; i < ac; i++)
-    {
-        /* code */
-        j = 0;
-        while(av[i][j])
-        {
-            if(!isdigit(av[i][j]))
-            {
-                std::cerr<<"invalid input \n";
-                exit(0);
-            }
-            j++;
-        }
-        if (std::atof(av[i]) < 0)
-        {
-            std::cerr << "Invalid Input: Number Less Than 0\n";
-            exit(0);
-        }
-    }
-    
-}
 
 int main(int ac, char *av[])
 {
+    std::string input;
     if (ac < 3)
     {
-        std::cerr << "Invalid Input: Less Than 2 Numbers\n";
+        std::cerr << "Invalid Input: Less Than 2 arguments\n";
         exit(0);
     }
     else
     {
+        for (int i = 1; i < ac; i++)
+        {
+            input = av[i];
+            if (input.empty())
+            {
+                std::cout<< "invalid input: empty input  "<<std::endl;
+                return 1;
+            }
+        }
+        
         algo_list(ac, av);
         algo_vector(ac, av);
     }
     return 0;
 }
-
-
-
-// int main(int ac, char *av[])
-// {
-//     if ((ac - 1) % 2 != 0)
-//     {
-//         flag = true;
-//         tmp = std::atof(av[ac - 1]);
-//         if (std::atof(av[ac - 1]) < 0)
-//             exit(1);
-//         ac -= 1;
-//     }
-
-//     std::cout << "Before : ";
-//     if (ac < 6)
-//     {
-//         for (int i = 1; i < ac; i++)
-//             std::cout << av[i] << " ";
-//     }
-//     else
-//     {
-//         for (int i = 1; i < 6; i++)
-//             std::cout << av[i] << " ";
-//         std::cout << "[...]";
-//     }
-//     std::list<std::pair<unsigned int, unsigned int> > lst;
-//     for (int i = 1; i < ac; i += 2)
-//     {
-//         if (isdigit(*av[i]))
-//         {
-//             checkInput(av[i], av[i + 1]);
-//             lst.push_back(std::make_pair(std::atof(av[i]), std::atof(av[i + 1])));
-//         }
-//     }
-//     std::list<unsigned int> lst_a, lst_b;
-//     algo(ac, av, lst, lst_a, lst_b, 'l');
-//     std::list<std::pair<unsigned int, unsigned int> > dec;
-//     for (int i = 1; i < ac; i += 2)
-//     {
-//         if (isdigit(*av[i]))
-//         {
-//             checkInput(av[i], av[i + 1]);
-//             dec.push_back(std::make_pair(std::atof(av[i]), std::atof(av[i + 1])));
-//         }
-//     }
-//     std::vector<unsigned int> dec_a, dec_b;
-//     algo(ac, av, dec, dec_a, dec_b, 'd');
-// }
 

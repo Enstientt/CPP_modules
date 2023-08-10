@@ -18,13 +18,12 @@ class BitcoinExchange{
         BitcoinExchange(BitcoinExchange const & copy);
         BitcoinExchange &operator=(BitcoinExchange const &rh);
         void addPrice(int date, float price);
-        std::map<int, float> getData() const {return this->_data;};
         float ExchangeRate(std::string date);
         ~BitcoinExchange();
-    int compareStr(std::string str1, std::string str2);
-    int calculateDaysSinceEpoch(const std::string& date);
+        int compareStr(std::string str1, std::string str2);
+        int calculateDays(const std::string& date);
+        void validateData();
     static bool validDate(std::string date);
-    void validateData();
     static bool validDouble(std::string price);
 };
 #endif

@@ -29,8 +29,13 @@ std::stack<int> rpn( char *av)
             std::cout << "Invalid Input" << std::endl;
             exit(1);
         }
-        if (isdigit(av[i]))
+        if (isdigit(av[i])  && av[i + 1] && !isdigit(av[i + 1]))
             stack.push(av[i] - '0');
+        else if(isdigit(av[i])  && av[i + 1] && isdigit(av[i + 1]))
+        {
+            std::cout<<"digits must  only be  between 0 and 9"<<std::endl;
+            exit(1);
+        }
         else if (av[i] == '+' || av[i] == '-' || av[i] == '*' || av[i] == '/' )
         {
             if (stack.size() < 2)
@@ -74,7 +79,13 @@ int main(int ac , char **av)
         std::cout << "Invalid Input" << std::endl;
         return 1;
     }
+    if(input.length() == 1)
+    {
+        std::cout<<input<<std::endl;
+        return 1;
+    }
     std::stack<int> stack = rpn(av[1]);
     std::cout<<stack.top()<<std::endl;
+    
     return 0;
 }

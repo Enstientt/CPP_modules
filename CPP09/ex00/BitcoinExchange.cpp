@@ -1,9 +1,7 @@
 #include "BitcoinExchange.hpp"
-#include <iostream>
-#include <string>
-#include <string.h>
 
 BitcoinExchange::BitcoinExchange(){
+    validateData();
 }
 
 BitcoinExchange::BitcoinExchange(BitcoinExchange const & copy){
@@ -24,7 +22,6 @@ void  BitcoinExchange::addPrice(int date, float price){
 }
 
 float BitcoinExchange::ExchangeRate(std::string date) {
-    // int found = 0;
     std::ifstream file("data.csv");
     std::string line;
     std::string date1;
@@ -32,7 +29,6 @@ float BitcoinExchange::ExchangeRate(std::string date) {
     this->_data.clear();
     std::getline(file, line);
     int min = 0;
-    validateData();
      while (std::getline(file, line))
     {
         std::stringstream sss(line);
@@ -49,12 +45,12 @@ float BitcoinExchange::ExchangeRate(std::string date) {
 }
 
 int BitcoinExchange::compareStr(std::string date,std::string date2){
-        int date1 = calculateDaysSinceEpoch(date);
-        int datee2 = calculateDaysSinceEpoch(date2);
+        int date1 = calculateDays(date);
+        int datee2 = calculateDays(date2);
         int difference = date1 - datee2;
         return difference;
 }
- int BitcoinExchange::calculateDaysSinceEpoch(const std::string& date) {
+ int BitcoinExchange::calculateDays(const std::string& date) {
         int days = 0;
         std::string year = date.substr(0, 4);
         std::string month = date.substr(5, 2);
@@ -65,7 +61,6 @@ int BitcoinExchange::compareStr(std::string date,std::string date2){
 
         days += 365 * year1;
         days += (year1 / 4) - (year1 / 100) + (year1 / 400);
-
         int daysInMonth[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
         for (int m = 1; m < month1; ++m) {
             days += daysInMonth[m];
@@ -132,6 +127,11 @@ int BitcoinExchange::compareStr(std::string date,std::string date2){
     int day1 = std::atof(day.c_str());
     int year1 = std::atof(year.c_str());
     int month1 = std::atof(month.c_str());
+    if (year1 < 2009)
+    {
+        std::cout << "Error: bad input  => "<<date << std::endl;
+        return false;
+    }
     if ((month1==2 && year1%4==0 && (day1 > 29 || day1 < 1))
         || (month1==2 && year1%4!=0 && (day1 > 28 || day1 < 1)))
     {
@@ -163,16 +163,18 @@ void BitcoinExchange::validateData(){
     std::string date;
     std::string price;
     std::getline(file, line);
+    if (line !="date,exchange_rate")
+    {
+        std::cout << "Error: invalid data base format"<< std::endl;
+        exit(1);
+    }
     while (std::getline(file, line))
     {
         std::stringstream sss(line);
         std::getline(sss, date, ',');
         std::getline(sss, price, ',');
         if (!validDate(date))
-        {
-            std::cout << "Error: bad input in the data base => "<<date << std::endl;
             exit(1);
-        }
         if (!validDouble(price))
         {
             std::cout << "Error: bad input in the data base => "<<price << std::endl;
@@ -184,7 +186,7 @@ void BitcoinExchange::validateData(){
 bool BitcoinExchange::validDouble(std::string price){
     int dout = 0;
     for (size_t i = 0; i < price.length(); i++){
-        if (i == 0 && (price[i] == '-' || price[i] == '+' ))
+        if (i == 0 && (price[i] == '+' ))
             continue;
         if (price[i] == '.')
             dout++;
@@ -192,6 +194,7 @@ bool BitcoinExchange::validDouble(std::string price){
             return false;
         if (price[i] != '.' &&  (price[i] < '0' || price[i] > '9'))
             return false;
+        
     }
     return true;
 }
